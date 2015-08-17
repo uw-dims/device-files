@@ -17,14 +17,15 @@
   <version>1.0.0</version>
   <packaging>jar</packaging>
   <name>
-    Device Files: Extract ata/scsi Properties of Files such as /dev/sda
+    Device Files: Derive VendorInfo, Serial Number, Size of e.g. /dev/sda
   </name>
 
   <repositories>
     <!-- 
-    To locate our dependent artifacts which are not (yet) available at
-    Maven Central, we bundle them into this project-local repo.
-    Alternatively, user could grab sources from gitthub.
+	 To locate our dependent artifacts which are not (yet) available at
+	 Maven Central, we bundle them into this project-local repo.
+	 Alternatively, user could grab sources from github, see
+	 https://github.com/uw-dims/java-native-loader.git
     -->
     <repository>
       <id>device-files.local</id>

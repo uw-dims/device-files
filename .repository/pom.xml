@@ -1,0 +1,73 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" 
+	 xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
+	 xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 
+			     http://maven.apache.org/maven-v4_0_0.xsd">
+  <modelVersion>4.0.0</modelVersion>
+
+  <!--
+      This pom is purely a vehicle for copying the 3rd party artifacts
+      on which the device-files project depends into a project-local
+      repository that is then bundled along with the project.  This
+      way, end users can build device-files, even though its dependent
+      artifacts are not (yet) at Maven Central.
+      
+      This module is then NOT part of the device-files codebase itself.
+
+      Note how in the install plugin configuration, we have
+      to supply exact pomFiles to be installed alongside the jar.
+      Without this, the pom found in the jar itself is NOT correctly
+      copied into the final repos, so dependency info is lost.  This
+      is a known bug for the install plugin 2.5.2, see
+      http://jira.codehaus.org/browse/MINSTALL-110.
+
+      We use the dependency plugin's unpack-dependency goal to put the
+      required poms onto the local filessytem. All very ugly!
+  -->
+
+  <groupId>edu.uw.apl.commons</groupId>
+  <artifactId>device-files-local-repo-builder</artifactId>
+  <version>1.0.0</version>
+  <packaging>pom</packaging>
+
+  <name>
+  Device Files: Local Repository Construction for Dependent Artifact Resolution
+  </name>
+
+  <dependencies>
+    <dependency>
+      <groupId>edu.uw.apl.commons</groupId>
+      <artifactId>native-lib-loader</artifactId>
+      <version>2.1.0</version>
+    </dependency>
+  </dependencies>
+
+  <build>
+    <defaultGoal>process-sources</defaultGoal>
+    <plugins>
+      <plugin>
+	<groupId>org.apache.maven.plugins</groupId>
+	<artifactId>maven-dependency-plugin</artifactId>
+	<version>2.9</version>
+	<executions>
+	  <execution>
+	    <id>copy-dependencies</id>
+	    <goals>
+	      <goal>copy-dependencies</goal>
+	    </goals>
+	    <configuration>
+	      <useRepositoryLayout>true</useRepositoryLayout>
+	      <copyPom>true</copyPom>
+	      <addParentPoms>true</addParentPoms>
+	      <includeGroupIds>
+		edu.uw.apl.commons
+	      </includeGroupIds>
+	      <outputDirectory>${project.basedir}</outputDirectory>
+	    </configuration>
+	  </execution>
+	</executions>
+      </plugin>
+    </plugins>
+  </build>
+  
+</project>
+
