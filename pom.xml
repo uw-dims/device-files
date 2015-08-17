@@ -4,11 +4,6 @@
 			     http://maven.apache.org/maven-v4_0_0.xsd">
   <modelVersion>4.0.0</modelVersion>
   
-  <properties>
-    <!-- Override this by activating the 'tester' profile -->
-    <skipTests>true</skipTests>
-  </properties>
-  
   <!--
       We have native libraries (JNI/C) bundled into our artifact but,
       due to the composition of our Makefiles (see e.g.
@@ -245,9 +240,14 @@
       <plugins>
 
 	<plugin>
+	  <artifactId>maven-compiler-plugin</artifactId>
+	  <version>3.3</version>
+	</plugin>
+
+	<plugin>
 	  <artifactId>maven-surefire-plugin</artifactId>
+	  <version>2.18.1</version>
 	  <configuration>
-	    <skipTests>${skipTests}</skipTests>
 	  </configuration>
 	</plugin>
 
