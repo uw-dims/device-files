@@ -14,6 +14,20 @@ code under [Linux] (./src/main/native/Linux/Makefile) only (both
 Windows native builds.
 
 
+## Installation
+
+```
+$ cd /path/to/device-files
+
+$ mvn test
+
+$ mvn install
+
+$ mvn javadoc:javadoc
+```
+
+The javadoc step should leave the api docs in target/site/apidocs/.
+
 ## API
 
 The main class is 
@@ -51,9 +65,9 @@ Aspects of this framework include
   (https://github.com/uw-dims/java-native-loader/blob/master/main/src/main/java/edu/uw/apl/nativelibloader/OSInfo.java).
   For example, amd64 maps to x86_64.
 
-* The pom also shows how use a 'native' profile ensures that only a
+* The pom also shows how use of a 'native' profile ensures that only a
   power user need build the native C code on any given platform.  A
-  regular Maven user builds just the Java classes.
+  regular Maven user builds and tests just the Java classes.
   
 * The pom also shows how we define PREFIX and LIBNAME values and pass
   those down to the platform-dependent build as environment

@@ -73,6 +73,7 @@
       
       <plugin>
 	<artifactId>maven-jar-plugin</artifactId>
+	<version>2.6</version>
 	<configuration>
 	  <archive>
 	    <manifest>
@@ -91,6 +92,7 @@
   
   <profiles>
     <profile>
+      <!-- We use the assembler profile to add licensing to the sources -->
       <id>assembler</id>
       <build>
 	<defaultGoal>process-sources</defaultGoal>
@@ -101,8 +103,8 @@
 	    <version>2.5</version>
 	    <configuration>
 	      <header>LICENSE.txt</header>
-	    <quiet>false</quiet>
-	    <strictCheck>true</strictCheck>
+	      <quiet>false</quiet>
+	      <strictCheck>true</strictCheck>
 	    </configuration>
 	    <executions>
 	      <execution>
@@ -117,7 +119,10 @@
 		    <include>src/test/java/**/*.java</include>
 		    <include>src/main/native/**/*.c</include>
 		    <include>src/main/native/**/*.h</include>
+		    <!-- Seems unable to handle Makefiles -->
+		    <!--
 		    <include>src/main/native/**/Makefile</include>
+		    -->
 		  </includes>
 		</configuration>
 	      </execution>
