@@ -71,7 +71,7 @@ Aspects of this framework include
   
 * The pom also shows how we define PREFIX and LIBNAME values and pass
   those down to the platform-dependent build as environment
-  variables. For Linux, the platform-dependent build is a [Makefile]
+  variables. For Linux, the platform-independent build is a [Makefile]
   (src/main/native/Linux/Makefile).
 
 * The result of the native build is a platform (+ bitness) specific
@@ -84,3 +84,12 @@ Aspects of this framework include
   NativeLoader API call, which can be seen in the static initializer
   in the [DeviceFile]
   (src/main/java/edu/uw/apl/commons/devicefiles/DeviceFile.java).
+
+## To Do
+
+* The Linux code for drive parameter identification does not work on USB
+'thumb' drives.  There must be some other kernel entry point for
+identifying those drives.  The GUI tool 'palimpsest' can identify
+these correctly, so perhaps examine its codebase.
+
+* Build for MacOS and Windows.
