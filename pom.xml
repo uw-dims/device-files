@@ -56,7 +56,77 @@
     </dependency>
   </dependencies>
 
+  <build>
+    <defaultGoal>compile</defaultGoal>
+    <plugins>
+      <plugin>
+	<artifactId>maven-compiler-plugin</artifactId>
+	<version>3.3</version>
+      </plugin>
+      
+      <plugin>
+	<artifactId>maven-surefire-plugin</artifactId>
+	<version>2.18.1</version>
+	<configuration>
+	</configuration>
+      </plugin>
+      
+      <plugin>
+	<artifactId>maven-jar-plugin</artifactId>
+	<configuration>
+	  <archive>
+	    <manifest>
+	      <addDefaultImplementationEntries>
+		true
+	      </addDefaultImplementationEntries>
+	      <addDefaultSpecificationEntries>
+		true
+	      </addDefaultSpecificationEntries>
+	    </manifest>
+	  </archive>
+	</configuration>
+      </plugin>
+    </plugins>
+  </build>
+  
   <profiles>
+    <profile>
+      <id>assembler</id>
+      <build>
+	<defaultGoal>process-sources</defaultGoal>
+	<plugins>
+	  <plugin>
+	    <groupId>com.mycila</groupId>
+	    <artifactId>license-maven-plugin</artifactId>
+	    <version>2.5</version>
+	    <configuration>
+	      <header>LICENSE.txt</header>
+	    <quiet>false</quiet>
+	    <strictCheck>true</strictCheck>
+	    </configuration>
+	    <executions>
+	      <execution>
+		<id>main</id>
+		<phase>process-sources</phase>
+		<goals>
+		  <goal>format</goal>
+		</goals>
+		<configuration>
+		  <includes>
+		    <include>src/main/java/**/*.java</include>
+		    <include>src/test/java/**/*.java</include>
+		    <include>src/main/native/**/*.c</include>
+		    <include>src/main/native/**/*.h</include>
+		    <include>src/main/native/**/Makefile</include>
+		  </includes>
+		</configuration>
+	      </execution>
+	    </executions>
+	  </plugin>
+	</plugins>
+      </build>
+    </profile>
+    
     <!-- Canonicalise all 32-bit arch names to 'x86' -->
     <profile>
       <id>x86</id>
@@ -236,38 +306,5 @@
       </profile>
     </profiles>
 
-    <build>
-      <defaultGoal>compile</defaultGoal>
-      <plugins>
-
-	<plugin>
-	  <artifactId>maven-compiler-plugin</artifactId>
-	  <version>3.3</version>
-	</plugin>
-
-	<plugin>
-	  <artifactId>maven-surefire-plugin</artifactId>
-	  <version>2.18.1</version>
-	  <configuration>
-	  </configuration>
-	</plugin>
-
-	<plugin>
-	  <artifactId>maven-jar-plugin</artifactId>
-	  <configuration>
-	    <archive>
-	      <manifest>
-		<addDefaultImplementationEntries>
-		  true
-		</addDefaultImplementationEntries>
-		<addDefaultSpecificationEntries>
-		  true
-		</addDefaultSpecificationEntries>
-	      </manifest>
-	    </archive>
-	  </configuration>
-	</plugin>
-      </plugins>
-    </build>
 
 </project>
