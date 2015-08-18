@@ -84,14 +84,15 @@ public class DeviceFile {
 		return concat.replaceAll( "\\s", "_" );
 	}
 
-	// for debug purposes
-	String vendorID() {
+	public String vendorID() {
 		return vendorID( disk.getPath() );
 	}
-	String productID() {
+	
+	public String productID() {
 		return productID( disk.getPath() );
 	}
-	String serialNumber() {
+	
+	public String serialNumber() {
 		return serialNumber( disk.getPath() );
 	}
 
