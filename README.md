@@ -56,10 +56,10 @@ String id = df.getID();
 The Device Files Maven project also highlights the use of the
 [Java Native Loader]
 (https://github.com/uw-dims/java-native-loader/tree/master) framework.
-Aspects of this framework include
+Aspects of this framework include:
 
 * The local [pom] (./pom.xml) shows how we use profiles to
-  canonicalize the results of Maven's <arch> property (which itself
+  canonicalize the results of Maven's 'activation/arch' property (which itself
   delegates to ${os.arch}) to match the scheme used in the
   [Native Loader]
   (https://github.com/uw-dims/java-native-loader/blob/master/main/src/main/java/edu/uw/apl/nativelibloader/OSInfo.java).
@@ -71,7 +71,7 @@ Aspects of this framework include
   
 * The pom also shows how we define PREFIX and LIBNAME values and pass
   those down to the platform-dependent build as environment
-  variables. For Linux, the platform-independent build is a [Makefile]
+  variables. For Linux, the platform-dependent build is a [Makefile]
   (src/main/native/Linux/Makefile).
 
 * The result of the native build is a platform (+ bitness) specific
@@ -92,4 +92,4 @@ Aspects of this framework include
 identifying those drives.  The GUI tool 'palimpsest' can identify
 these correctly, so perhaps examine its codebase.
 
-* Build for MacOS and Windows.
+* Build native library on MacOS and Windows platforms.
